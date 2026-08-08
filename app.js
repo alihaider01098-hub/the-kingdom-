@@ -591,22 +591,41 @@ function showAdmin() {
   if (!authed) {
     page.innerHTML = `<div class="login-box">
       <h3><i class="fas fa-lock"></i> لوحة التحكم</h3>
+      <input type="email" id="adminEmail" placeholder="البريد الإلكتروني">
       <input type="password" id="adminPass" placeholder="كلمة المرور">
       <button class="btn-primary" style="width:100%" onclick="adminLogin()">دخول</button>
-      <p style="margin-top:12px;font-size:0.8rem;color:var(--text-muted)">الافتراضية: kingdom2026</p>
+      <p style="margin-top:12px;font-size:0.8rem;color:var(--text-muted)">يجب إضافة حساب المدير من لوحة Supabase Authentication</p>
     </div>`;
     return;
   }
   renderAdminPanel();
 }
 
-function adminLogin() {
+async function adminLogin() {
+  const email = document.getElementById("adminEmail")?.value.trim();
   const pass = document.getElementById("adminPass")?.value;
-  if (pass === ADMIN_PASS) {
-    sessionStorage.setItem("tk_admin", "1");
-    renderAdminPanel();
-    showToast("مرحباً بك في لوحة التحكم", "success");
-  } else showToast("كلمة المرور خاطئة", "error");
+  
+  if (!email || !pass) {
+    showToast("الرجاء إدخال البريد الإلكتروني وكلمة المرور", "error");
+    return;
+  }
+
+  if (supabaseClient) {
+    const { data, error } = await supabaseClient.auth.signInWithPassword({
+      email: email,
+      password: pass
+    });
+
+    if (error) {
+      showToast("بيانات الدخول غير صحيحة", "error");
+    } else {
+      sessionStorage.setItem("tk_admin", "1");
+      renderAdminPanel();
+      showToast("مرحباً بك في لوحة التحكم", "success");
+    }
+  } else {
+    showToast("فشل الاتصال بقاعدة البيانات", "error");
+  }
 }
 
 function renderAdminPanel() {
