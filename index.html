@@ -1,0 +1,185 @@
+<!DOCTYPE html>
+<html lang="ar" dir="rtl" data-theme="dark">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0, viewport-fit=cover">
+  <title>THE KINGDOM | متجر الجيمنج</title>
+  <meta name="description" content="مملكة الجيمنج — تجميعات جاهزة، قطع PC، كونسول وملحقات بأسعار بالدولار">
+  <meta property="og:title" content="THE KINGDOM | متجر الجيمنج">
+  <meta property="og:description" content="تجميعات وقطع أصلية من أقوى المتاجر العالمية">
+  <meta property="og:type" content="website">
+  <meta name="theme-color" content="#080808">
+  <link rel="manifest" href="manifest.webmanifest">
+  <meta name="apple-mobile-web-app-capable" content="yes">
+  <meta name="apple-mobile-web-app-status-bar-style" content="black-translucent">
+  <link rel="icon" href="data:image/svg+xml,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 100 100'><text y='.9em' font-size='90'>⚔️</text></svg>">
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Cairo:wght@400;500;600;700;800&family=Orbitron:wght@600;700;800&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css">
+  <link rel="stylesheet" href="style.css">
+</head>
+<body>
+
+  <div class="loading-overlay" id="loader">
+    <div class="loader-ring"></div>
+    <div style="color:var(--gold);font-family:Orbitron,sans-serif;font-weight:700">THE KINGDOM</div>
+  </div>
+
+  <div class="top-bar">
+    <i class="fas fa-crown"></i> THE KINGDOM — تجميعات • قطع PC • كونسول • أسعار بالدولار
+  </div>
+  <div class="top-bar" id="flashBanner" style="background:linear-gradient(90deg,#8a2020,#d4af37);color:#111;font-weight:800">
+    <i class="fas fa-bolt"></i> Flash Sale
+  </div>
+
+  <header>
+    <div class="header-inner">
+      <div class="logo" onclick="location.hash='home';location.reload()">
+        <svg class="logo-svg" viewBox="0 0 100 100" xmlns="http://www.w3.org/2000/svg">
+          <circle cx="50" cy="48" r="28" fill="#0a0a0a" stroke="#d4af37" stroke-width="2.5"/>
+          <circle cx="50" cy="48" r="20" fill="none" stroke="#8a7020" stroke-width="1" opacity="0.6"/>
+          <rect x="47.5" y="22" width="5" height="52" rx="1" fill="#c0c0c8"/>
+          <polygon points="50,14 46,24 54,24" fill="#e8e8f0"/>
+          <rect x="42" y="48" width="16" height="5" rx="1" fill="#d4af37"/>
+          <g transform="rotate(-28 50 50)"><rect x="47.5" y="26" width="4" height="44" rx="1" fill="#a0a0a8"/><polygon points="50,18 46.5,27 53.5,27" fill="#d0d0d8"/><rect x="43" y="48" width="14" height="4" rx="1" fill="#9a7b20"/></g>
+          <g transform="rotate(28 50 50)"><rect x="47.5" y="26" width="4" height="44" rx="1" fill="#a0a0a8"/><polygon points="50,18 46.5,27 53.5,27" fill="#d0d0d8"/><rect x="43" y="48" width="14" height="4" rx="1" fill="#9a7b20"/></g>
+        </svg>
+        <div class="logo-text">
+          <h1>THE KINGDOM</h1>
+          <span>GAMING EMPIRE</span>
+        </div>
+      </div>
+      <div class="header-actions">
+        <div class="search-box">
+          <i class="fas fa-search"></i>
+          <input type="text" id="searchInput" placeholder="ابحث بالاسم، الشركة، المواصفات...">
+        </div>
+        <button class="icon-btn" id="langToggle" title="Language" style="width:auto;padding:0 10px;font-size:0.75rem;font-weight:700">EN</button>
+        <button class="icon-btn" id="themeToggle" title="الوضع"><i class="fas fa-sun"></i></button>
+        <button class="icon-btn" id="favBtn" title="المفضلة"><i class="fas fa-heart"></i><span class="badge-count" id="favCount" style="display:none">0</span></button>
+        <button class="icon-btn" id="cartBtn" title="السلة"><i class="fas fa-shopping-cart"></i><span class="badge-count" id="cartCount" style="display:none">0</span></button>
+      </div>
+    </div>
+  </header>
+
+  <!-- HOME PAGE -->
+  <div class="page active" id="page-home">
+    <nav class="cat-nav" id="catNav"></nav>
+    <section class="hero">
+      <h2>THE KINGDOM</h2>
+      <p>مملكة الجيمنج — تجميعات جاهزة، قطع أصلية، كونسولات من أقوى المتاجر العالمية</p>
+      <div style="margin-top:16px;display:flex;gap:10px;justify-content:center;flex-wrap:wrap">
+        <button class="btn-primary" onclick="openBuilder()"><i class="fas fa-tools"></i> منشئ التجميعات</button>
+        <button class="btn-secondary" onclick="location.hash='compare'"><i class="fas fa-balance-scale"></i> مقارنة المنتجات</button>
+      </div>
+    </section>
+    <div class="container">
+      <div id="homeSections"></div>
+      <div id="bundlesSection"></div>
+      <div class="section-title" id="productsSection"><i class="fas fa-th-large"></i> كل المنتجات</div>
+      <div class="filters-bar">
+        <div class="filter-group">
+          <label>الشركة</label>
+          <select id="brandFilter"></select>
+        </div>
+        <div class="filter-group">
+          <label>من</label>
+          <input type="number" id="minPrice" placeholder="0" min="0" style="width:70px">
+          <label>إلى</label>
+          <input type="number" id="maxPrice" placeholder="9999" min="0" style="width:70px">
+        </div>
+        <div class="filter-group">
+          <label>ترتيب</label>
+          <select id="sortBy">
+            <option value="default">الافتراضي</option>
+            <option value="price-asc">السعر ↑</option>
+            <option value="price-desc">السعر ↓</option>
+            <option value="name">الاسم</option>
+          </select>
+        </div>
+        <div class="filter-chips">
+          <button class="chip active" data-stock="all" onclick="setStockFilter('all')">الكل</button>
+          <button class="chip" data-stock="in" onclick="setStockFilter('in')">متوفر</button>
+          <button class="chip" data-stock="out" onclick="setStockFilter('out')">غير متوفر</button>
+        </div>
+        <span class="results-count" id="resultsCount">0 منتج</span>
+      </div>
+      <div class="products-grid" id="productsGrid"></div>
+    </div>
+  </div>
+
+  <!-- DETAIL PAGE -->
+  <div class="page" id="page-detail"></div>
+
+  <!-- WISHLIST PAGE -->
+  <div class="page" id="page-wishlist">
+    <div class="container" style="padding-top:24px">
+      <div class="section-title"><i class="fas fa-heart"></i> المفضلة</div>
+      <div id="wishlistGrid"></div>
+    </div>
+  </div>
+
+  <!-- ADMIN PAGE -->
+  <div class="page" id="page-admin"></div>
+
+  <!-- BUILDER PAGE -->
+  <div class="page" id="page-builder"></div>
+
+  <!-- COMPARE PAGE -->
+  <div class="page" id="page-compare"></div>
+
+  <!-- Cart -->
+  <div class="cart-overlay" id="cartOverlay"></div>
+  <div class="cart-drawer" id="cartDrawer">
+    <div class="cart-header">
+      <h3><i class="fas fa-shopping-cart"></i> سلة المشتريات</h3>
+      <button class="icon-btn" id="cartClose"><i class="fas fa-times"></i></button>
+    </div>
+    <div class="cart-items" id="cartItems"></div>
+    <div class="cart-footer">
+      <div class="cart-total"><span>المجموع</span><span id="cartTotal">$0</span></div>
+      <button class="btn-primary" id="checkoutBtn" style="width:100%;justify-content:center">
+        <i class="fab fa-whatsapp"></i> إرسال الطلب عبر واتساب
+      </button>
+    </div>
+  </div>
+
+  <div class="toast" id="toast"></div>
+
+  <!-- Mobile bottom nav -->
+  <nav class="bottom-nav">
+    <button data-page="home" onclick="location.hash='home'"><i class="fas fa-home"></i>الرئيسية</button>
+    <button data-page="search" onclick="document.getElementById('searchInput').focus()"><i class="fas fa-search"></i>بحث</button>
+    <button data-page="wishlist" onclick="location.hash='wishlist'"><i class="fas fa-heart"></i>المفضلة<span class="badge-count" id="bnFavCount" style="display:none">0</span></button>
+    <button data-page="cart" onclick="openCart()"><i class="fas fa-shopping-cart"></i>السلة<span class="badge-count" id="bnCartCount" style="display:none">0</span></button>
+    <button data-page="menu" onclick="location.hash='admin'"><i class="fas fa-bars"></i>القائمة</button>
+  </nav>
+
+  <footer>
+    <div class="footer-inner">
+      <div class="footer-col">
+        <h4>THE KINGDOM</h4>
+        <p>مملكة الجيمنج — تجميعات وقطع أصلية.</p>
+      </div>
+      <div class="footer-col">
+        <h4>روابط</h4>
+        <a href="https://www.amazon.com" target="_blank">Amazon</a>
+        <a href="https://www.newegg.com" target="_blank">Newegg</a>
+        <a href="#admin">لوحة التحكم</a>
+      </div>
+      <div class="footer-col">
+        <h4>تواصل</h4>
+        <a href="https://wa.me/9647000000000" target="_blank"><i class="fab fa-whatsapp"></i> واتساب</a>
+      </div>
+    </div>
+    <div class="footer-bottom">
+      <i class="fas fa-crown" style="color:var(--gold-dim)"></i> © 2026 THE KINGDOM
+    </div>
+  </footer>
+
+  <script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2"></script>
+  <script src="data.js"></script>
+  <script src="app.js"></script>
+</body>
+</html>
