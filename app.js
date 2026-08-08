@@ -50,15 +50,17 @@ document.addEventListener("DOMContentLoaded", () => {
 
 let supabaseClient = null;
 
-function initSupabase() {
-  try {
-    if (typeof supabase !== "undefined" && SUPABASE_URL && SUPABASE_KEY) {
-      supabaseClient = supabase.createClient(SUPABASE_URL, SUPABASE_KEY);
-    }
-  } catch (e) {
-    console.warn("Supabase init failed", e);
+// دالة مخصصة للتحميل المحلي الفوري وتصحيح الذاكرة
+function loadProductsLocally() {
+  // 1. مسح الذاكرة المعطوبة وإجبار الموقع على قراءة المنتجات الأساسية من ملف data.js
+  if (typeof DEFAULT_PRODUCTS !== "undefined") {
+    PRODUCTS = JSON.parse(JSON.stringify(DEFAULT_PRODUCTS));
+    localStorage.setItem("tk_products", JSON.stringify(PRODUCTS)); // تحديث الذاكرة بنسخة سليمة
+  } else {
+    console.error("تحذير: ملف data.js غير متصل أو لم يتم تحميله!");
   }
 }
+
 
 function mapFromDb(row) {
   return {
