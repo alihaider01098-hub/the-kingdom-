@@ -13,21 +13,40 @@ let currentView = "home";
 let editingId = null;
 
 document.addEventListener("DOMContentLoaded", async () => {
-  await loadProducts();
-  await seedSupabaseIfEmpty();
-  // reload after potential seed
-  if (supabaseClient) {
-    try {
+  // مؤقت أمان لإجبار الموقع على الفتح وإخفاء شاشة التحميل بعد 3 ثوانٍ
+  // حتى لو تأخرت استجابة قاعدة البيانات
+  const failsafeTimer = setTimeout(() => {
+    hideLoader();
+    loadTheme();
+    handleRoute();
+    bindGlobal();
+  }, 3000);
+
+  try {
+    await loadProducts();
+    await seedSupabaseIfEmpty();
+    if (supabaseClient) {
       const { data } = await supabaseClient.from("products").select("*").order("id");
       if (data && data.length) PRODUCTS = data.map(mapFromDb);
-    } catch(e) {}
+    }
+  } catch (e) {
+    console.error("حدث خطأ أثناء جلب البيانات:", e);
+  } finally {
+    // إلغاء المؤقت إذا نجح التحميل بسرعة
+    clearTimeout(failsafeTimer);
+    loadTheme();
+    hideLoader();
+    handleRoute();
+    bindGlobal();
+    
+    // منع تكرار إضافة الحدث
+    if (!window._boundHash) {
+      window.addEventListener("hashchange", handleRoute);
+      window._boundHash = true;
+    }
   }
-  loadTheme();
-  hideLoader();
-  handleRoute();
-  bindGlobal();
-  window.addEventListener("hashchange", handleRoute);
 });
+
 
 let supabaseClient = null;
 
