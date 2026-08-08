@@ -1,1498 +1,196 @@
 <!DOCTYPE html>
-<html lang="ar" dir="rtl">
+<html lang="ar" dir="rtl" data-theme="dark">
 <head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>THE KINGDOM | متجر الجيمنج</title>
-    <link rel="preconnect" href="https://fonts.googleapis.com">
-    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-    <link href="https://fonts.googleapis.com/css2?family=Cairo:wght@400;500;600;700;800&family=Orbitron:wght@600;700;800&display=swap" rel="stylesheet">
-    <style>
-        :root {
-            --black: #080808;
-            --black-2: #0f0f0f;
-            --lead: #1e1e22;
-            --lead-2: #2a2a30;
-            --gray: #6a6a75;
-            --gray-light: #9a9aa8;
-            --gold: #d4af37;
-            --gold-bright: #f0d060;
-            --gold-dim: #8a7020;
-            --text: #eaeaf0;
-            --text-muted: #888896;
-            --card: #141416;
-            --border: #2e2e34;
-        }
-
-        * { margin: 0; padding: 0; box-sizing: border-box; }
-
-        body {
-            font-family: 'Cairo', sans-serif;
-            background: var(--black);
-            color: var(--text);
-            line-height: 1.6;
-            min-height: 100vh;
-            background-image:
-                radial-gradient(ellipse at 50% 0%, rgba(212,175,55,0.07) 0%, transparent 50%),
-                linear-gradient(180deg, #080808 0%, #0c0c0e 100%);
-        }
-
-        .top-bar {
-            background: var(--lead);
-            border-bottom: 1px solid var(--gold-dim);
-            text-align: center;
-            padding: 8px 16px;
-            font-size: 0.85rem;
-            color: var(--gold);
-            font-weight: 600;
-        }
-
-        header {
-            background: var(--black-2);
-            border-bottom: 2px solid var(--gold-dim);
-            position: sticky;
-            top: 0;
-            z-index: 200;
-            box-shadow: 0 4px 24px rgba(0,0,0,0.8);
-        }
-
-        .header-inner {
-            max-width: 1300px;
-            margin: 0 auto;
-            padding: 10px 20px;
-            display: flex;
-            align-items: center;
-            justify-content: space-between;
-            gap: 14px;
-            flex-wrap: wrap;
-        }
-
-        .logo {
-            display: flex;
-            align-items: center;
-            gap: 12px;
-            text-decoration: none;
-        }
-
-        .logo-svg {
-            width: 56px;
-            height: 56px;
-            flex-shrink: 0;
-        }
-
-        .logo-text h1 {
-            font-family: 'Orbitron', sans-serif;
-            font-size: 1.35rem;
-            font-weight: 800;
-            color: var(--gold);
-            letter-spacing: 2px;
-            text-shadow: 0 0 18px rgba(212,175,55,0.35);
-        }
-
-        .logo-text span {
-            font-size: 0.7rem;
-            color: var(--gray-light);
-            letter-spacing: 1.5px;
-        }
-
-        nav {
-            display: flex;
-            gap: 3px;
-            flex-wrap: wrap;
-        }
-
-        nav a {
-            text-decoration: none;
-            color: var(--gray-light);
-            font-weight: 600;
-            font-size: 0.85rem;
-            padding: 7px 11px;
-            border-radius: 6px;
-            transition: all 0.2s;
-            border: 1px solid transparent;
-            cursor: pointer;
-        }
-
-        nav a:hover, nav a.active {
-            color: var(--gold);
-            background: rgba(212,175,55,0.1);
-            border-color: var(--gold-dim);
-        }
-
-        /* HERO */
-        .hero {
-            padding: 48px 20px 52px;
-            text-align: center;
-            border-bottom: 1px solid var(--border);
-            background: linear-gradient(180deg, rgba(30,30,34,0.5) 0%, transparent 100%);
-        }
-
-        .hero-logo {
-            width: 90px;
-            height: 90px;
-            margin: 0 auto 16px;
-        }
-
-        .hero h2 {
-            font-family: 'Orbitron', sans-serif;
-            font-size: 2.3rem;
-            font-weight: 800;
-            color: var(--gold-bright);
-            margin-bottom: 8px;
-            letter-spacing: 2px;
-            text-shadow: 0 0 40px rgba(212,175,55,0.3);
-        }
-
-        .hero p {
-            color: var(--text-muted);
-            font-size: 1.02rem;
-            max-width: 500px;
-            margin: 0 auto 20px;
-        }
-
-        .hero-stats {
-            display: flex;
-            justify-content: center;
-            gap: 32px;
-            flex-wrap: wrap;
-        }
-
-        .stat strong {
-            display: block;
-            font-family: 'Orbitron', sans-serif;
-            font-size: 1.35rem;
-            color: var(--gold);
-        }
-
-        .stat span { font-size: 0.78rem; color: var(--gray); }
-
-        .container {
-            max-width: 1300px;
-            margin: 0 auto;
-            padding: 28px 20px 50px;
-        }
-
-        /* STORES + IG */
-        .links-bar {
-            display: grid;
-            grid-template-columns: 1fr 1fr;
-            gap: 16px;
-            margin-bottom: 28px;
-        }
-
-        @media (max-width: 700px) {
-            .links-bar { grid-template-columns: 1fr; }
-        }
-
-        .links-box {
-            background: var(--lead);
-            border: 1px solid var(--border);
-            border-radius: 12px;
-            padding: 18px;
-        }
-
-        .links-box h4 {
-            font-size: 0.92rem;
-            color: var(--gold);
-            margin-bottom: 12px;
-            font-weight: 700;
-        }
-
-        .links-row {
-            display: flex;
-            gap: 8px;
-            flex-wrap: wrap;
-        }
-
-        .link-chip {
-            background: var(--black-2);
-            border: 1px solid var(--border);
-            color: var(--gray-light);
-            padding: 7px 14px;
-            border-radius: 8px;
-            text-decoration: none;
-            font-size: 0.82rem;
-            font-weight: 600;
-            transition: all 0.2s;
-            display: inline-flex;
-            align-items: center;
-            gap: 6px;
-        }
-
-        .link-chip:hover {
-            border-color: var(--gold);
-            color: var(--gold);
-        }
-
-        .link-chip.ig:hover {
-            border-color: #e1306c;
-            color: #e1306c;
-        }
-
-        /* SECTION */
-        .section-head {
-            display: flex;
-            align-items: center;
-            gap: 12px;
-            margin: 32px 0 16px;
-        }
-
-        .section-head h3 {
-            font-family: 'Orbitron', sans-serif;
-            font-size: 1.05rem;
-            color: var(--gold);
-            letter-spacing: 1px;
-            white-space: nowrap;
-        }
-
-        .section-head .line {
-            flex: 1;
-            height: 1px;
-            background: linear-gradient(90deg, var(--gold-dim), transparent);
-        }
-
-        /* PRODUCTS */
-        .products {
-            display: grid;
-            grid-template-columns: repeat(auto-fill, minmax(230px, 1fr));
-            gap: 16px;
-        }
-
-        .product {
-            background: var(--card);
-            border: 1px solid var(--border);
-            border-radius: 12px;
-            overflow: hidden;
-            transition: all 0.25s;
-            display: flex;
-            flex-direction: column;
-            text-decoration: none;
-            color: inherit;
-            cursor: pointer;
-        }
-
-        .product:hover {
-            border-color: var(--gold-dim);
-            transform: translateY(-5px);
-            box-shadow: 0 14px 36px rgba(0,0,0,0.55), 0 0 24px rgba(212,175,55,0.1);
-        }
-
-        .product-img {
-            height: 160px;
-            background: var(--lead);
-            position: relative;
-            overflow: hidden;
-        }
-
-        .product-img img {
-            width: 100%;
-            height: 100%;
-            object-fit: cover;
-            transition: transform 0.35s;
-        }
-
-        .product:hover .product-img img {
-            transform: scale(1.06);
-        }
-
-        .product-badge {
-            position: absolute;
-            top: 10px;
-            right: 10px;
-            background: var(--gold);
-            color: #111;
-            font-size: 0.68rem;
-            font-weight: 800;
-            padding: 3px 9px;
-            border-radius: 4px;
-            z-index: 2;
-        }
-
-        .product-badge.sale {
-            background: #c41e1e;
-            color: #fff;
-        }
-
-        .product-body {
-            padding: 13px 15px 15px;
-            flex: 1;
-            display: flex;
-            flex-direction: column;
-        }
-
-        .product-cat {
-            font-size: 0.68rem;
-            color: var(--gold-dim);
-            font-weight: 700;
-            text-transform: uppercase;
-            letter-spacing: 0.5px;
-            margin-bottom: 3px;
-        }
-
-        .product-name {
-            font-size: 0.92rem;
-            font-weight: 700;
-            color: var(--text);
-            margin-bottom: 5px;
-            line-height: 1.35;
-        }
-
-        .product-desc {
-            font-size: 0.76rem;
-            color: var(--text-muted);
-            margin-bottom: 12px;
-            flex: 1;
-        }
-
-        .product-footer {
-            display: flex;
-            align-items: center;
-            justify-content: space-between;
-            gap: 8px;
-        }
-
-        .price {
-            font-family: 'Orbitron', sans-serif;
-            font-size: 1.05rem;
-            font-weight: 700;
-            color: var(--gold);
-        }
-
-        .buy-btn {
-            background: linear-gradient(180deg, var(--gold), var(--gold-dim));
-            color: #111;
-            border: none;
-            padding: 6px 13px;
-            border-radius: 6px;
-            font-family: inherit;
-            font-weight: 800;
-            font-size: 0.78rem;
-            pointer-events: none;
-        }
-
-        .product:hover .buy-btn {
-            background: linear-gradient(180deg, var(--gold-bright), var(--gold));
-        }
-
-        /* BUILDS special */
-        .builds-grid {
-            display: grid;
-            grid-template-columns: repeat(auto-fill, minmax(280px, 1fr));
-            gap: 18px;
-        }
-
-        .build-card {
-            background: var(--card);
-            border: 1px solid var(--border);
-            border-radius: 14px;
-            overflow: hidden;
-            transition: all 0.25s;
-            text-decoration: none;
-            color: inherit;
-            display: flex;
-            flex-direction: column;
-        }
-
-        .build-card:hover {
-            border-color: var(--gold);
-            transform: translateY(-5px);
-            box-shadow: 0 14px 40px rgba(0,0,0,0.55), 0 0 28px rgba(212,175,55,0.12);
-        }
-
-        .build-img {
-            height: 180px;
-            position: relative;
-            overflow: hidden;
-            background: var(--lead);
-        }
-
-        .build-img img {
-            width: 100%;
-            height: 100%;
-            object-fit: cover;
-            transition: transform 0.35s;
-        }
-
-        .build-card:hover .build-img img {
-            transform: scale(1.05);
-        }
-
-        .build-tier {
-            position: absolute;
-            bottom: 10px;
-            right: 10px;
-            background: rgba(0,0,0,0.75);
-            border: 1px solid var(--gold-dim);
-            color: var(--gold);
-            font-size: 0.72rem;
-            font-weight: 800;
-            padding: 4px 10px;
-            border-radius: 5px;
-            font-family: 'Orbitron', sans-serif;
-        }
-
-        .build-body {
-            padding: 16px 18px 18px;
-            flex: 1;
-            display: flex;
-            flex-direction: column;
-        }
-
-        .build-body h4 {
-            font-size: 1.1rem;
-            font-weight: 800;
-            color: var(--gold-bright);
-            margin-bottom: 6px;
-        }
-
-        .build-specs {
-            font-size: 0.8rem;
-            color: var(--text-muted);
-            margin-bottom: 14px;
-            line-height: 1.7;
-            flex: 1;
-        }
-
-        .build-specs span {
-            color: var(--gray-light);
-        }
-
-        .build-footer {
-            display: flex;
-            align-items: center;
-            justify-content: space-between;
-        }
-
-        .build-price {
-            font-family: 'Orbitron', sans-serif;
-            font-size: 1.25rem;
-            font-weight: 700;
-            color: var(--gold);
-        }
-
-        .cat-section { display: none; }
-        .cat-section.active { display: block; }
-
-        footer {
-            background: var(--black-2);
-            border-top: 2px solid var(--gold-dim);
-            padding: 36px 20px 20px;
-            margin-top: 10px;
-        }
-
-        .footer-inner {
-            max-width: 1300px;
-            margin: 0 auto 22px;
-            display: grid;
-            grid-template-columns: repeat(auto-fit, minmax(180px, 1fr));
-            gap: 24px;
-        }
-
-        .footer-col h4 {
-            font-family: 'Orbitron', sans-serif;
-            color: var(--gold);
-            font-size: 0.92rem;
-            margin-bottom: 12px;
-            letter-spacing: 1px;
-        }
-
-        .footer-col p, .footer-col a {
-            color: var(--text-muted);
-            font-size: 0.84rem;
-            text-decoration: none;
-            display: block;
-            margin-bottom: 6px;
-        }
-
-        .footer-col a:hover { color: var(--gold); }
-
-        .footer-bottom {
-            text-align: center;
-            padding-top: 16px;
-            border-top: 1px solid var(--border);
-            color: var(--gray);
-            font-size: 0.8rem;
-        }
-
-        .footer-bottom span { color: var(--gold-dim); }
-
-        @media (max-width: 600px) {
-            .hero h2 { font-size: 1.55rem; }
-            .logo-text h1 { font-size: 1.1rem; }
-            .products { grid-template-columns: repeat(auto-fill, minmax(155px, 1fr)); gap: 12px; }
-            .product-img { height: 120px; }
-            .build-img { height: 140px; }
-            nav a { font-size: 0.75rem; padding: 6px 8px; }
-        }
-    </style>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>THE KINGDOM | متجر الجيمنج</title>
+  <meta name="description" content="مملكة الجيمنج — تجميعات جاهزة، قطع PC، كونسول وملحقات">
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Cairo:wght@400;500;600;700;800&family=Orbitron:wght@600;700;800&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css">
+  <link rel="stylesheet" href="css/style.css">
 </head>
 <body>
 
-    <div class="top-bar">
-        THE KINGDOM — متجر الجيمنج • تجميعات جاهزة • قطع PC • كونسول • أسعار بالدولار
-    </div>
+  <div class="top-bar">
+    <i class="fas fa-crown"></i> THE KINGDOM — تجميعات • قطع PC • كونسول • أسعار بالدولار
+  </div>
 
-    <header>
-        <div class="header-inner">
-            <a href="#" class="logo">
-                <!-- شعار: ثلاث سيوف + شمس سوداء -->
-                <svg class="logo-svg" viewBox="0 0 100 100" xmlns="http://www.w3.org/2000/svg">
-                    <!-- شمس سوداء -->
-                    <circle cx="50" cy="48" r="28" fill="#0a0a0a" stroke="#d4af37" stroke-width="2.5"/>
-                    <circle cx="50" cy="48" r="20" fill="none" stroke="#8a7020" stroke-width="1" opacity="0.6"/>
-                    <!-- أشعة -->
-                    <g stroke="#d4af37" stroke-width="1.5" opacity="0.7">
-                        <line x1="50" y1="8" x2="50" y2="16"/>
-                        <line x1="50" y1="80" x2="50" y2="88"/>
-                        <line x1="10" y1="48" x2="18" y2="48"/>
-                        <line x1="82" y1="48" x2="90" y2="48"/>
-                        <line x1="22" y1="20" x2="28" y2="26"/>
-                        <line x1="72" y1="70" x2="78" y2="76"/>
-                        <line x1="78" y1="20" x2="72" y2="26"/>
-                        <line x1="28" y1="70" x2="22" y2="76"/>
-                    </g>
-                    <!-- السيف الأوسط -->
-                    <rect x="47.5" y="22" width="5" height="52" rx="1" fill="#c0c0c8"/>
-                    <polygon points="50,14 46,24 54,24" fill="#e8e8f0"/>
-                    <rect x="42" y="48" width="16" height="5" rx="1" fill="#d4af37"/>
-                    <!-- السيف الأيسر -->
-                    <g transform="rotate(-28 50 50)">
-                        <rect x="47.5" y="26" width="4" height="44" rx="1" fill="#a0a0a8"/>
-                        <polygon points="50,18 46.5,27 53.5,27" fill="#d0d0d8"/>
-                        <rect x="43" y="48" width="14" height="4" rx="1" fill="#9a7b20"/>
-                    </g>
-                    <!-- السيف الأيمن -->
-                    <g transform="rotate(28 50 50)">
-                        <rect x="47.5" y="26" width="4" height="44" rx="1" fill="#a0a0a8"/>
-                        <polygon points="50,18 46.5,27 53.5,27" fill="#d0d0d8"/>
-                        <rect x="43" y="48" width="14" height="4" rx="1" fill="#9a7b20"/>
-                    </g>
-                </svg>
-                <div class="logo-text">
-                    <h1>THE KINGDOM</h1>
-                    <span>GAMING EMPIRE</span>
-                </div>
-            </a>
-            <nav>
-                <a class="active" onclick="showCat('all', this)">الكل</a>
-                <a onclick="showCat('builds', this)">تجميعات جاهزة</a>
-                <a onclick="showCat('cpu', this)">معالجات</a>
-                <a onclick="showCat('gpu', this)">كروت شاشة</a>
-                <a onclick="showCat('ram', this)">رامات</a>
-                <a onclick="showCat('storage', this)">تخزين</a>
-                <a onclick="showCat('mobo', this)">مذربورد</a>
-                <a onclick="showCat('psu', this)">بورسبلاي</a>
-                <a onclick="showCat('case', this)">كيسات</a>
-                <a onclick="showCat('console', this)">كونسول</a>
-                <a onclick="showCat('peripherals', this)">ملحقات</a>
-            </nav>
-        </div>
-    </header>
-
-    <section class="hero">
-        <svg class="hero-logo" viewBox="0 0 100 100" xmlns="http://www.w3.org/2000/svg">
-            <circle cx="50" cy="48" r="28" fill="#0a0a0a" stroke="#d4af37" stroke-width="2.5"/>
-            <circle cx="50" cy="48" r="20" fill="none" stroke="#8a7020" stroke-width="1" opacity="0.6"/>
-            <g stroke="#d4af37" stroke-width="1.5" opacity="0.7">
-                <line x1="50" y1="8" x2="50" y2="16"/>
-                <line x1="50" y1="80" x2="50" y2="88"/>
-                <line x1="10" y1="48" x2="18" y2="48"/>
-                <line x1="82" y1="48" x2="90" y2="48"/>
-                <line x1="22" y1="20" x2="28" y2="26"/>
-                <line x1="72" y1="70" x2="78" y2="76"/>
-                <line x1="78" y1="20" x2="72" y2="26"/>
-                <line x1="28" y1="70" x2="22" y2="76"/>
-            </g>
-            <rect x="47.5" y="22" width="5" height="52" rx="1" fill="#c0c0c8"/>
-            <polygon points="50,14 46,24 54,24" fill="#e8e8f0"/>
-            <rect x="42" y="48" width="16" height="5" rx="1" fill="#d4af37"/>
-            <g transform="rotate(-28 50 50)">
-                <rect x="47.5" y="26" width="4" height="44" rx="1" fill="#a0a0a8"/>
-                <polygon points="50,18 46.5,27 53.5,27" fill="#d0d0d8"/>
-                <rect x="43" y="48" width="14" height="4" rx="1" fill="#9a7b20"/>
-            </g>
-            <g transform="rotate(28 50 50)">
-                <rect x="47.5" y="26" width="4" height="44" rx="1" fill="#a0a0a8"/>
-                <polygon points="50,18 46.5,27 53.5,27" fill="#d0d0d8"/>
-                <rect x="43" y="48" width="14" height="4" rx="1" fill="#9a7b20"/>
-            </g>
+  <header>
+    <div class="header-inner">
+      <div class="logo" onclick="location.reload()">
+        <svg class="logo-svg" viewBox="0 0 100 100" xmlns="http://www.w3.org/2000/svg">
+          <circle cx="50" cy="48" r="28" fill="#0a0a0a" stroke="#d4af37" stroke-width="2.5"/>
+          <circle cx="50" cy="48" r="20" fill="none" stroke="#8a7020" stroke-width="1" opacity="0.6"/>
+          <g stroke="#d4af37" stroke-width="1.5" opacity="0.7">
+            <line x1="50" y1="8" x2="50" y2="16"/><line x1="50" y1="80" x2="50" y2="88"/>
+            <line x1="10" y1="48" x2="18" y2="48"/><line x1="82" y1="48" x2="90" y2="48"/>
+            <line x1="22" y1="20" x2="28" y2="26"/><line x1="72" y1="70" x2="78" y2="76"/>
+            <line x1="78" y1="20" x2="72" y2="26"/><line x1="28" y1="70" x2="22" y2="76"/>
+          </g>
+          <rect x="47.5" y="22" width="5" height="52" rx="1" fill="#c0c0c8"/>
+          <polygon points="50,14 46,24 54,24" fill="#e8e8f0"/>
+          <rect x="42" y="48" width="16" height="5" rx="1" fill="#d4af37"/>
+          <g transform="rotate(-28 50 50)">
+            <rect x="47.5" y="26" width="4" height="44" rx="1" fill="#a0a0a8"/>
+            <polygon points="50,18 46.5,27 53.5,27" fill="#d0d0d8"/>
+            <rect x="43" y="48" width="14" height="4" rx="1" fill="#9a7b20"/>
+          </g>
+          <g transform="rotate(28 50 50)">
+            <rect x="47.5" y="26" width="4" height="44" rx="1" fill="#a0a0a8"/>
+            <polygon points="50,18 46.5,27 53.5,27" fill="#d0d0d8"/>
+            <rect x="43" y="48" width="14" height="4" rx="1" fill="#9a7b20"/>
+          </g>
         </svg>
-        <h2>THE KINGDOM</h2>
-        <p>مملكة الجيمنج — تجميعات جاهزة، قطع أصلية، كونسولات ومعدات من أقوى المتاجر العالمية.</p>
-        <div class="hero-stats">
-            <div class="stat"><strong>50+</strong><span>منتج</span></div>
-            <div class="stat"><strong>6</strong><span>تجميعات جاهزة</span></div>
-            <div class="stat"><strong>$</strong><span>أسعار بالدولار</span></div>
+        <div class="logo-text">
+          <h1>THE KINGDOM</h1>
+          <span>GAMING EMPIRE</span>
         </div>
-    </section>
+      </div>
 
-    <div class="container">
-
-        <div class="links-bar">
-            <div class="links-box">
-                <h4>المتجر العالمية</h4>
-                <div class="links-row">
-                    <a class="link-chip" href="https://www.amazon.com/s?k=gaming+pc" target="_blank">Amazon</a>
-                    <a class="link-chip" href="https://www.alibaba.com" target="_blank">Alibaba</a>
-                    <a class="link-chip" href="https://www.aliexpress.com" target="_blank">AliExpress</a>
-                    <a class="link-chip" href="https://www.newegg.com" target="_blank">Newegg</a>
-                    <a class="link-chip" href="https://www.bestbuy.com" target="_blank">Best Buy</a>
-                    <a class="link-chip" href="https://www.ebay.com" target="_blank">eBay</a>
-                </div>
-            </div>
-            <div class="links-box">
-                <h4>صفحات إنستغرام</h4>
-                <div class="links-row">
-                    <a class="link-chip ig" href="https://www.instagram.com/amazon/" target="_blank">📷 Amazon</a>
-                    <a class="link-chip ig" href="https://www.instagram.com/newegg/" target="_blank">📷 Newegg</a>
-                    <a class="link-chip ig" href="https://www.instagram.com/razer/" target="_blank">📷 Razer</a>
-                    <a class="link-chip ig" href="https://www.instagram.com/nvidia/" target="_blank">📷 NVIDIA</a>
-                    <a class="link-chip ig" href="https://www.instagram.com/amd/" target="_blank">📷 AMD</a>
-                    <a class="link-chip ig" href="https://www.instagram.com/playstation/" target="_blank">📷 PlayStation</a>
-                    <a class="link-chip ig" href="https://www.instagram.com/xbox/" target="_blank">📷 Xbox</a>
-                    <a class="link-chip ig" href="https://www.instagram.com/logitechg/" target="_blank">📷 Logitech G</a>
-                </div>
-            </div>
+      <div class="header-actions">
+        <div class="search-box">
+          <i class="fas fa-search"></i>
+          <input type="text" id="searchInput" placeholder="ابحث عن منتج...">
         </div>
-
-        <!-- ========== BUILDS ========== -->
-        <div class="cat-section active" data-cat="builds all">
-            <div class="section-head"><h3>تجميعات جاهزة</h3><div class="line"></div></div>
-            <div class="builds-grid">
-
-                <a class="build-card" href="https://www.amazon.com/s?k=gaming+pc+rtx+4060" target="_blank">
-                    <div class="build-img">
-                        <img src="https://images.unsplash.com/photo-1587202372775-e229f172b9d7?w=600&h=400&fit=crop" alt="Entry Build" loading="lazy">
-                        <span class="build-tier">ENTRY</span>
-                    </div>
-                    <div class="build-body">
-                        <h4>مملكة المبتدئ</h4>
-                        <div class="build-specs">
-                            <span>CPU:</span> Ryzen 5 5600<br>
-                            <span>GPU:</span> RTX 4060 8GB<br>
-                            <span>RAM:</span> 16GB DDR4 3200<br>
-                            <span>SSD:</span> 1TB NVMe<br>
-                            <span>PSU:</span> 650W Bronze
-                        </div>
-                        <div class="build-footer">
-                            <div class="build-price">$799</div>
-                            <span class="buy-btn">شراء ←</span>
-                        </div>
-                    </div>
-                </a>
-
-                <a class="build-card" href="https://www.amazon.com/s?k=gaming+pc+rtx+4070" target="_blank">
-                    <div class="build-img">
-                        <img src="https://images.unsplash.com/photo-1593640408182-31c70c8268f5?w=600&h=400&fit=crop" alt="Mid Build" loading="lazy">
-                        <span class="build-tier">MID</span>
-                    </div>
-                    <div class="build-body">
-                        <h4>مملكة المحارب</h4>
-                        <div class="build-specs">
-                            <span>CPU:</span> Ryzen 5 7600<br>
-                            <span>GPU:</span> RTX 4070 Super<br>
-                            <span>RAM:</span> 32GB DDR5 6000<br>
-                            <span>SSD:</span> 2TB NVMe<br>
-                            <span>PSU:</span> 750W Gold
-                        </div>
-                        <div class="build-footer">
-                            <div class="build-price">$1,399</div>
-                            <span class="buy-btn">شراء ←</span>
-                        </div>
-                    </div>
-                </a>
-
-                <a class="build-card" href="https://www.amazon.com/s?k=gaming+pc+rtx+4080" target="_blank">
-                    <div class="build-img">
-                        <img src="https://images.unsplash.com/photo-1625842268584-8f3296236761?w=600&h=400&fit=crop" alt="High Build" loading="lazy">
-                        <span class="build-tier">HIGH</span>
-                    </div>
-                    <div class="build-body">
-                        <h4>مملكة الفارس</h4>
-                        <div class="build-specs">
-                            <span>CPU:</span> Ryzen 7 7800X3D<br>
-                            <span>GPU:</span> RTX 4080 Super<br>
-                            <span>RAM:</span> 32GB DDR5 6400<br>
-                            <span>SSD:</span> 2TB 990 PRO<br>
-                            <span>PSU:</span> 850W Gold
-                        </div>
-                        <div class="build-footer">
-                            <div class="build-price">$2,199</div>
-                            <span class="buy-btn">شراء ←</span>
-                        </div>
-                    </div>
-                </a>
-
-                <a class="build-card" href="https://www.amazon.com/s?k=gaming+pc+rtx+4090" target="_blank">
-                    <div class="build-img">
-                        <img src="https://images.unsplash.com/photo-1587202372634-32705e3bf49c?w=600&h=400&fit=crop" alt="Ultra Build" loading="lazy">
-                        <span class="build-tier">ULTRA</span>
-                    </div>
-                    <div class="build-body">
-                        <h4>مملكة الملك</h4>
-                        <div class="build-specs">
-                            <span>CPU:</span> Ryzen 9 7950X3D<br>
-                            <span>GPU:</span> RTX 4090 24GB<br>
-                            <span>RAM:</span> 64GB DDR5 6000<br>
-                            <span>SSD:</span> 4TB NVMe<br>
-                            <span>PSU:</span> 1000W Platinum
-                        </div>
-                        <div class="build-footer">
-                            <div class="build-price">$3,899</div>
-                            <span class="buy-btn">شراء ←</span>
-                        </div>
-                    </div>
-                </a>
-
-                <a class="build-card" href="https://www.amazon.com/s?k=streaming+pc+build" target="_blank">
-                    <div class="build-img">
-                        <img src="https://images.unsplash.com/photo-1547082299-de196ea013d6?w=600&h=400&fit=crop" alt="Streamer Build" loading="lazy">
-                        <span class="build-tier">STREAM</span>
-                    </div>
-                    <div class="build-body">
-                        <h4>مملكة البث</h4>
-                        <div class="build-specs">
-                            <span>CPU:</span> i7-14700K<br>
-                            <span>GPU:</span> RTX 4070 Ti Super<br>
-                            <span>RAM:</span> 32GB DDR5<br>
-                            <span>SSD:</span> 2TB NVMe<br>
-                            <span>PSU:</span> 850W Gold
-                        </div>
-                        <div class="build-footer">
-                            <div class="build-price">$1,799</div>
-                            <span class="buy-btn">شراء ←</span>
-                        </div>
-                    </div>
-                </a>
-
-                <a class="build-card" href="https://www.amazon.com/s?k=budget+gaming+pc" target="_blank">
-                    <div class="build-img">
-                        <img src="https://images.unsplash.com/photo-1616587894289-86480e533129?w=600&h=400&fit=crop" alt="Budget Build" loading="lazy">
-                        <span class="build-tier">BUDGET</span>
-                    </div>
-                    <div class="build-body">
-                        <h4>مملكة الاقتصادي</h4>
-                        <div class="build-specs">
-                            <span>CPU:</span> Ryzen 5 5500<br>
-                            <span>GPU:</span> RTX 3050 8GB<br>
-                            <span>RAM:</span> 16GB DDR4<br>
-                            <span>SSD:</span> 512GB NVMe<br>
-                            <span>PSU:</span> 550W Bronze
-                        </div>
-                        <div class="build-footer">
-                            <div class="build-price">$549</div>
-                            <span class="buy-btn">شراء ←</span>
-                        </div>
-                    </div>
-                </a>
-
-            </div>
-        </div>
-
-        <!-- CPU -->
-        <div class="cat-section active" data-cat="cpu all">
-            <div class="section-head"><h3>المعالجات CPU</h3><div class="line"></div></div>
-            <div class="products">
-                <a class="product" href="https://www.amazon.com/s?k=Ryzen+7+7800X3D" target="_blank">
-                    <div class="product-img">
-                        <img src="https://images.unsplash.com/photo-1555617981-dac3880eac6e?w=400&h=300&fit=crop" alt="Ryzen 7800X3D" loading="lazy">
-                        <span class="product-badge">جديد</span>
-                    </div>
-                    <div class="product-body">
-                        <div class="product-cat">AMD</div>
-                        <div class="product-name">AMD Ryzen 7 7800X3D</div>
-                        <div class="product-desc">8 أنوية • أفضل معالج ألعاب</div>
-                        <div class="product-footer">
-                            <div class="price">$359</div>
-                            <span class="buy-btn">شراء</span>
-                        </div>
-                    </div>
-                </a>
-                <a class="product" href="https://www.amazon.com/s?k=Ryzen+5+7600" target="_blank">
-                    <div class="product-img">
-                        <img src="https://images.unsplash.com/photo-1591799264318-7e6ef8ddb7ea?w=400&h=300&fit=crop" alt="Ryzen 7600" loading="lazy">
-                    </div>
-                    <div class="product-body">
-                        <div class="product-cat">AMD</div>
-                        <div class="product-name">AMD Ryzen 5 7600</div>
-                        <div class="product-desc">6 أنوية • قيمة ممتازة</div>
-                        <div class="product-footer">
-                            <div class="price">$189</div>
-                            <span class="buy-btn">شراء</span>
-                        </div>
-                    </div>
-                </a>
-                <a class="product" href="https://www.amazon.com/s?k=i7-14700K" target="_blank">
-                    <div class="product-img">
-                        <img src="https://images.unsplash.com/photo-1518770660439-4636190af475?w=400&h=300&fit=crop" alt="i7-14700K" loading="lazy">
-                        <span class="product-badge sale">عرض</span>
-                    </div>
-                    <div class="product-body">
-                        <div class="product-cat">Intel</div>
-                        <div class="product-name">Intel Core i7-14700K</div>
-                        <div class="product-desc">20 نواة • جيمنج + مونتاج</div>
-                        <div class="product-footer">
-                            <div class="price">$319</div>
-                            <span class="buy-btn">شراء</span>
-                        </div>
-                    </div>
-                </a>
-                <a class="product" href="https://www.amazon.com/s?k=i5-14600KF" target="_blank">
-                    <div class="product-img">
-                        <img src="https://images.unsplash.com/photo-1555617981-dac3880eac6e?w=400&h=300&fit=crop&sat=-50" alt="i5-14600KF" loading="lazy">
-                    </div>
-                    <div class="product-body">
-                        <div class="product-cat">Intel</div>
-                        <div class="product-name">Intel Core i5-14600KF</div>
-                        <div class="product-desc">14 نواة • أداء قوي</div>
-                        <div class="product-footer">
-                            <div class="price">$229</div>
-                            <span class="buy-btn">شراء</span>
-                        </div>
-                    </div>
-                </a>
-            </div>
-        </div>
-
-        <!-- GPU -->
-        <div class="cat-section active" data-cat="gpu all">
-            <div class="section-head"><h3>كروت الشاشة GPU</h3><div class="line"></div></div>
-            <div class="products">
-                <a class="product" href="https://www.amazon.com/s?k=RTX+4070+Super" target="_blank">
-                    <div class="product-img">
-                        <img src="https://images.unsplash.com/photo-1591488320449-011701bb6704?w=400&h=300&fit=crop" alt="RTX 4070 Super" loading="lazy">
-                        <span class="product-badge">جديد</span>
-                    </div>
-                    <div class="product-body">
-                        <div class="product-cat">NVIDIA</div>
-                        <div class="product-name">RTX 4070 Super 12GB</div>
-                        <div class="product-desc">1440p • DLSS 3</div>
-                        <div class="product-footer">
-                            <div class="price">$589</div>
-                            <span class="buy-btn">شراء</span>
-                        </div>
-                    </div>
-                </a>
-                <a class="product" href="https://www.amazon.com/s?k=RTX+4060+Ti" target="_blank">
-                    <div class="product-img">
-                        <img src="https://images.unsplash.com/photo-1587202372634-32705e3bf49c?w=400&h=300&fit=crop" alt="RTX 4060 Ti" loading="lazy">
-                    </div>
-                    <div class="product-body">
-                        <div class="product-cat">NVIDIA</div>
-                        <div class="product-name">RTX 4060 Ti 8GB</div>
-                        <div class="product-desc">1080p/1440p • كفاءة عالية</div>
-                        <div class="product-footer">
-                            <div class="price">$389</div>
-                            <span class="buy-btn">شراء</span>
-                        </div>
-                    </div>
-                </a>
-                <a class="product" href="https://www.amazon.com/s?k=RX+7800+XT" target="_blank">
-                    <div class="product-img">
-                        <img src="https://images.unsplash.com/photo-1591488320449-011701bb6704?w=400&h=300&fit=crop&hue=30" alt="RX 7800 XT" loading="lazy">
-                        <span class="product-badge sale">عرض</span>
-                    </div>
-                    <div class="product-body">
-                        <div class="product-cat">AMD</div>
-                        <div class="product-name">RX 7800 XT 16GB</div>
-                        <div class="product-desc">16GB VRAM • قيمة قوية</div>
-                        <div class="product-footer">
-                            <div class="price">$479</div>
-                            <span class="buy-btn">شراء</span>
-                        </div>
-                    </div>
-                </a>
-                <a class="product" href="https://www.amazon.com/s?k=RTX+4090" target="_blank">
-                    <div class="product-img">
-                        <img src="https://images.unsplash.com/photo-1625842268584-8f3296236761?w=400&h=300&fit=crop" alt="RTX 4090" loading="lazy">
-                    </div>
-                    <div class="product-body">
-                        <div class="product-cat">NVIDIA</div>
-                        <div class="product-name">RTX 4090 24GB</div>
-                        <div class="product-desc">أقوى كرت • 4K Ultra</div>
-                        <div class="product-footer">
-                            <div class="price">$1,599</div>
-                            <span class="buy-btn">شراء</span>
-                        </div>
-                    </div>
-                </a>
-            </div>
-        </div>
-
-        <!-- RAM -->
-        <div class="cat-section active" data-cat="ram all">
-            <div class="section-head"><h3>الرامات RAM</h3><div class="line"></div></div>
-            <div class="products">
-                <a class="product" href="https://www.amazon.com/s?k=Corsair+Vengeance+32GB+6000" target="_blank">
-                    <div class="product-img">
-                        <img src="https://images.unsplash.com/photo-1562976540-1502c912fc12?w=400&h=300&fit=crop" alt="Corsair RAM" loading="lazy">
-                    </div>
-                    <div class="product-body">
-                        <div class="product-cat">DDR5</div>
-                        <div class="product-name">Corsair Vengeance 32GB 6000</div>
-                        <div class="product-desc">2x16GB • CL30 • RGB</div>
-                        <div class="product-footer">
-                            <div class="price">$109</div>
-                            <span class="buy-btn">شراء</span>
-                        </div>
-                    </div>
-                </a>
-                <a class="product" href="https://www.amazon.com/s?k=G.Skill+Trident+Z5+32GB" target="_blank">
-                    <div class="product-img">
-                        <img src="https://images.unsplash.com/photo-1562976540-1502c912fc12?w=400&h=300&fit=crop&sat=-30" alt="G.Skill RAM" loading="lazy">
-                        <span class="product-badge">جديد</span>
-                    </div>
-                    <div class="product-body">
-                        <div class="product-cat">DDR5</div>
-                        <div class="product-name">G.Skill Trident Z5 32GB 6400</div>
-                        <div class="product-desc">أداء عالي للجيمنج</div>
-                        <div class="product-footer">
-                            <div class="price">$124</div>
-                            <span class="buy-btn">شراء</span>
-                        </div>
-                    </div>
-                </a>
-                <a class="product" href="https://www.amazon.com/s?k=Kingston+Fury+16GB+3200" target="_blank">
-                    <div class="product-img">
-                        <img src="https://images.unsplash.com/photo-1597872200969-2b65d56bd16b?w=400&h=300&fit=crop" alt="Kingston RAM" loading="lazy">
-                    </div>
-                    <div class="product-body">
-                        <div class="product-cat">DDR4</div>
-                        <div class="product-name">Kingston Fury Beast 16GB</div>
-                        <div class="product-desc">2x8GB 3200 • اقتصادي</div>
-                        <div class="product-footer">
-                            <div class="price">$42</div>
-                            <span class="buy-btn">شراء</span>
-                        </div>
-                    </div>
-                </a>
-                <a class="product" href="https://www.amazon.com/s?k=Corsair+Dominator+64GB" target="_blank">
-                    <div class="product-img">
-                        <img src="https://images.unsplash.com/photo-1562976540-1502c912fc12?w=400&h=300&fit=crop&bri=-20" alt="Dominator RAM" loading="lazy">
-                    </div>
-                    <div class="product-body">
-                        <div class="product-cat">DDR5</div>
-                        <div class="product-name">Corsair Dominator 64GB</div>
-                        <div class="product-desc">2x32GB • للمحترفين</div>
-                        <div class="product-footer">
-                            <div class="price">$249</div>
-                            <span class="buy-btn">شراء</span>
-                        </div>
-                    </div>
-                </a>
-            </div>
-        </div>
-
-        <!-- STORAGE -->
-        <div class="cat-section active" data-cat="storage all">
-            <div class="section-head"><h3>التخزين SSD / HDD</h3><div class="line"></div></div>
-            <div class="products">
-                <a class="product" href="https://www.amazon.com/s?k=Samsung+990+PRO+2TB" target="_blank">
-                    <div class="product-img">
-                        <img src="https://images.unsplash.com/photo-1597872200969-2b65d56bd16b?w=400&h=300&fit=crop" alt="Samsung 990 PRO" loading="lazy">
-                        <span class="product-badge">جديد</span>
-                    </div>
-                    <div class="product-body">
-                        <div class="product-cat">NVMe SSD</div>
-                        <div class="product-name">Samsung 990 PRO 2TB</div>
-                        <div class="product-desc">حتى 7450 MB/s</div>
-                        <div class="product-footer">
-                            <div class="price">$149</div>
-                            <span class="buy-btn">شراء</span>
-                        </div>
-                    </div>
-                </a>
-                <a class="product" href="https://www.amazon.com/s?k=WD+Black+SN850X+1TB" target="_blank">
-                    <div class="product-img">
-                        <img src="https://images.unsplash.com/photo-1531492746076-161ca9bcad58?w=400&h=300&fit=crop" alt="WD Black" loading="lazy">
-                    </div>
-                    <div class="product-body">
-                        <div class="product-cat">NVMe SSD</div>
-                        <div class="product-name">WD Black SN850X 1TB</div>
-                        <div class="product-desc">مصمم للجيمنج</div>
-                        <div class="product-footer">
-                            <div class="price">$89</div>
-                            <span class="buy-btn">شراء</span>
-                        </div>
-                    </div>
-                </a>
-                <a class="product" href="https://www.amazon.com/s?k=Crucial+T500+1TB" target="_blank">
-                    <div class="product-img">
-                        <img src="https://images.unsplash.com/photo-1597872200969-2b65d56bd16b?w=400&h=300&fit=crop&sat=-40" alt="Crucial T500" loading="lazy">
-                        <span class="product-badge sale">عرض</span>
-                    </div>
-                    <div class="product-body">
-                        <div class="product-cat">NVMe SSD</div>
-                        <div class="product-name">Crucial T500 1TB</div>
-                        <div class="product-desc">قيمة ممتازة • PCIe 4.0</div>
-                        <div class="product-footer">
-                            <div class="price">$79</div>
-                            <span class="buy-btn">شراء</span>
-                        </div>
-                    </div>
-                </a>
-                <a class="product" href="https://www.amazon.com/s?k=Seagate+4TB+Barracuda" target="_blank">
-                    <div class="product-img">
-                        <img src="https://images.unsplash.com/photo-1531492746076-161ca9bcad58?w=400&h=300&fit=crop&bri=-30" alt="Seagate HDD" loading="lazy">
-                    </div>
-                    <div class="product-body">
-                        <div class="product-cat">HDD</div>
-                        <div class="product-name">Seagate Barracuda 4TB</div>
-                        <div class="product-desc">تخزين كبير للألعاب</div>
-                        <div class="product-footer">
-                            <div class="price">$75</div>
-                            <span class="buy-btn">شراء</span>
-                        </div>
-                    </div>
-                </a>
-            </div>
-        </div>
-
-        <!-- MOBO -->
-        <div class="cat-section active" data-cat="mobo all">
-            <div class="section-head"><h3>المذربورد Motherboard</h3><div class="line"></div></div>
-            <div class="products">
-                <a class="product" href="https://www.amazon.com/s?k=MSI+B650+Tomahawk" target="_blank">
-                    <div class="product-img">
-                        <img src="https://images.unsplash.com/photo-1518770660439-4636190af475?w=400&h=300&fit=crop" alt="MSI B650" loading="lazy">
-                    </div>
-                    <div class="product-body">
-                        <div class="product-cat">AMD B650</div>
-                        <div class="product-name">MSI B650 Tomahawk WiFi</div>
-                        <div class="product-desc">Ryzen 7000 • WiFi 6E</div>
-                        <div class="product-footer">
-                            <div class="price">$219</div>
-                            <span class="buy-btn">شراء</span>
-                        </div>
-                    </div>
-                </a>
-                <a class="product" href="https://www.amazon.com/s?k=ASUS+ROG+X670E" target="_blank">
-                    <div class="product-img">
-                        <img src="https://images.unsplash.com/photo-1555617981-dac3880eac6e?w=400&h=300&fit=crop" alt="ASUS X670E" loading="lazy">
-                        <span class="product-badge">جديد</span>
-                    </div>
-                    <div class="product-body">
-                        <div class="product-cat">AMD X670E</div>
-                        <div class="product-name">ASUS ROG Strix X670E-F</div>
-                        <div class="product-desc">فلاجشيب • PCIe 5.0</div>
-                        <div class="product-footer">
-                            <div class="price">$399</div>
-                            <span class="buy-btn">شراء</span>
-                        </div>
-                    </div>
-                </a>
-                <a class="product" href="https://www.amazon.com/s?k=Gigabyte+B760+Aorus" target="_blank">
-                    <div class="product-img">
-                        <img src="https://images.unsplash.com/photo-1518770660439-4636190af475?w=400&h=300&fit=crop&sat=-20" alt="Gigabyte B760" loading="lazy">
-                    </div>
-                    <div class="product-body">
-                        <div class="product-cat">Intel B760</div>
-                        <div class="product-name">Gigabyte B760 Aorus Elite</div>
-                        <div class="product-desc">الجيل 14 • DDR5</div>
-                        <div class="product-footer">
-                            <div class="price">$169</div>
-                            <span class="buy-btn">شراء</span>
-                        </div>
-                    </div>
-                </a>
-                <a class="product" href="https://www.amazon.com/s?k=MSI+Z790+Edge" target="_blank">
-                    <div class="product-img">
-                        <img src="https://images.unsplash.com/photo-1591799264318-7e6ef8ddb7ea?w=400&h=300&fit=crop" alt="MSI Z790" loading="lazy">
-                    </div>
-                    <div class="product-body">
-                        <div class="product-cat">Intel Z790</div>
-                        <div class="product-name">MSI MPG Z790 Edge Ti</div>
-                        <div class="product-desc">أوفركلوك • أداء عالي</div>
-                        <div class="product-footer">
-                            <div class="price">$289</div>
-                            <span class="buy-btn">شراء</span>
-                        </div>
-                    </div>
-                </a>
-            </div>
-        </div>
-
-        <!-- PSU -->
-        <div class="cat-section active" data-cat="psu all">
-            <div class="section-head"><h3>البورسبلاي PSU</h3><div class="line"></div></div>
-            <div class="products">
-                <a class="product" href="https://www.amazon.com/s?k=Corsair+RM850x" target="_blank">
-                    <div class="product-img">
-                        <img src="https://images.unsplash.com/photo-1597872200969-2b65d56bd16b?w=400&h=300&fit=crop" alt="Corsair PSU" loading="lazy">
-                    </div>
-                    <div class="product-body">
-                        <div class="product-cat">80+ Gold</div>
-                        <div class="product-name">Corsair RM850x 850W</div>
-                        <div class="product-desc">Fully Modular • هادئ</div>
-                        <div class="product-footer">
-                            <div class="price">$139</div>
-                            <span class="buy-btn">شراء</span>
-                        </div>
-                    </div>
-                </a>
-                <a class="product" href="https://www.amazon.com/s?k=Seasonic+Focus+GX-750" target="_blank">
-                    <div class="product-img">
-                        <img src="https://images.unsplash.com/photo-1531492746076-161ca9bcad58?w=400&h=300&fit=crop" alt="Seasonic PSU" loading="lazy">
-                        <span class="product-badge">جديد</span>
-                    </div>
-                    <div class="product-body">
-                        <div class="product-cat">80+ Gold</div>
-                        <div class="product-name">Seasonic Focus GX-750</div>
-                        <div class="product-desc">جودة يابانية</div>
-                        <div class="product-footer">
-                            <div class="price">$119</div>
-                            <span class="buy-btn">شراء</span>
-                        </div>
-                    </div>
-                </a>
-                <a class="product" href="https://www.amazon.com/s?k=be+quiet+Dark+Power+1000W" target="_blank">
-                    <div class="product-img">
-                        <img src="https://images.unsplash.com/photo-1597872200969-2b65d56bd16b?w=400&h=300&fit=crop&bri=-25" alt="be quiet PSU" loading="lazy">
-                    </div>
-                    <div class="product-body">
-                        <div class="product-cat">80+ Platinum</div>
-                        <div class="product-name">be quiet! Dark Power 12 1000W</div>
-                        <div class="product-desc">شبه صامت • أنظمة قوية</div>
-                        <div class="product-footer">
-                            <div class="price">$249</div>
-                            <span class="buy-btn">شراء</span>
-                        </div>
-                    </div>
-                </a>
-                <a class="product" href="https://www.amazon.com/s?k=EVGA+600W" target="_blank">
-                    <div class="product-img">
-                        <img src="https://images.unsplash.com/photo-1531492746076-161ca9bcad58?w=400&h=300&fit=crop&sat=-50" alt="EVGA PSU" loading="lazy">
-                        <span class="product-badge sale">عرض</span>
-                    </div>
-                    <div class="product-body">
-                        <div class="product-cat">80+ Bronze</div>
-                        <div class="product-name">EVGA 600W Bronze</div>
-                        <div class="product-desc">اقتصادي ومتين</div>
-                        <div class="product-footer">
-                            <div class="price">$55</div>
-                            <span class="buy-btn">شراء</span>
-                        </div>
-                    </div>
-                </a>
-            </div>
-        </div>
-
-        <!-- CASE -->
-        <div class="cat-section active" data-cat="case all">
-            <div class="section-head"><h3>الكيسات Case</h3><div class="line"></div></div>
-            <div class="products">
-                <a class="product" href="https://www.amazon.com/s?k=Lian+Li+O11+Dynamic+EVO" target="_blank">
-                    <div class="product-img">
-                        <img src="https://images.unsplash.com/photo-1587202372775-e229f172b9d7?w=400&h=300&fit=crop" alt="Lian Li" loading="lazy">
-                    </div>
-                    <div class="product-body">
-                        <div class="product-cat">Mid Tower</div>
-                        <div class="product-name">Lian Li O11 Dynamic EVO</div>
-                        <div class="product-desc">مثالي للـ RGB والتبريد</div>
-                        <div class="product-footer">
-                            <div class="price">$169</div>
-                            <span class="buy-btn">شراء</span>
-                        </div>
-                    </div>
-                </a>
-                <a class="product" href="https://www.amazon.com/s?k=NZXT+H5+Flow" target="_blank">
-                    <div class="product-img">
-                        <img src="https://images.unsplash.com/photo-1616587894289-86480e533129?w=400&h=300&fit=crop" alt="NZXT H5" loading="lazy">
-                        <span class="product-badge">جديد</span>
-                    </div>
-                    <div class="product-body">
-                        <div class="product-cat">Mid Tower</div>
-                        <div class="product-name">NZXT H5 Flow RGB</div>
-                        <div class="product-desc">تبريد ممتاز • تصميم نظيف</div>
-                        <div class="product-footer">
-                            <div class="price">$99</div>
-                            <span class="buy-btn">شراء</span>
-                        </div>
-                    </div>
-                </a>
-                <a class="product" href="https://www.amazon.com/s?k=Corsair+4000D" target="_blank">
-                    <div class="product-img">
-                        <img src="https://images.unsplash.com/photo-1547082299-de196ea013d6?w=400&h=300&fit=crop" alt="Corsair 4000D" loading="lazy">
-                    </div>
-                    <div class="product-body">
-                        <div class="product-cat">Mid Tower</div>
-                        <div class="product-name">Corsair 4000D Airflow</div>
-                        <div class="product-desc">كلاسيكي موثوق</div>
-                        <div class="product-footer">
-                            <div class="price">$94</div>
-                            <span class="buy-btn">شراء</span>
-                        </div>
-                    </div>
-                </a>
-                <a class="product" href="https://www.amazon.com/s?k=Fractal+Meshify+2" target="_blank">
-                    <div class="product-img">
-                        <img src="https://images.unsplash.com/photo-1587202372634-32705e3bf49c?w=400&h=300&fit=crop" alt="Fractal" loading="lazy">
-                    </div>
-                    <div class="product-body">
-                        <div class="product-cat">Full Tower</div>
-                        <div class="product-name">Fractal Meshify 2</div>
-                        <div class="product-desc">مساحة كبيرة • تبريد قوي</div>
-                        <div class="product-footer">
-                            <div class="price">$149</div>
-                            <span class="buy-btn">شراء</span>
-                        </div>
-                    </div>
-                </a>
-            </div>
-        </div>
-
-        <!-- CONSOLE -->
-        <div class="cat-section active" data-cat="console all">
-            <div class="section-head"><h3>الكونسول Consoles</h3><div class="line"></div></div>
-            <div class="products">
-                <a class="product" href="https://www.amazon.com/s?k=PS5+Slim" target="_blank">
-                    <div class="product-img">
-                        <img src="https://images.unsplash.com/photo-1606144042614-b2417e99c4e3?w=400&h=300&fit=crop" alt="PS5" loading="lazy">
-                        <span class="product-badge">جديد</span>
-                    </div>
-                    <div class="product-body">
-                        <div class="product-cat">PlayStation</div>
-                        <div class="product-name">PS5 Slim 1TB</div>
-                        <div class="product-desc">النسخة النحيفة</div>
-                        <div class="product-footer">
-                            <div class="price">$449</div>
-                            <span class="buy-btn">شراء</span>
-                        </div>
-                    </div>
-                </a>
-                <a class="product" href="https://www.amazon.com/s?k=Xbox+Series+X" target="_blank">
-                    <div class="product-img">
-                        <img src="https://images.unsplash.com/photo-1621259182978-fbf93132d53d?w=400&h=300&fit=crop" alt="Xbox Series X" loading="lazy">
-                    </div>
-                    <div class="product-body">
-                        <div class="product-cat">Xbox</div>
-                        <div class="product-name">Xbox Series X 1TB</div>
-                        <div class="product-desc">4K / 120fps</div>
-                        <div class="product-footer">
-                            <div class="price">$499</div>
-                            <span class="buy-btn">شراء</span>
-                        </div>
-                    </div>
-                </a>
-                <a class="product" href="https://www.amazon.com/s?k=Xbox+Series+S" target="_blank">
-                    <div class="product-img">
-                        <img src="https://images.unsplash.com/photo-1621259182978-fbf93132d53d?w=400&h=300&fit=crop&bri=20" alt="Xbox Series S" loading="lazy">
-                        <span class="product-badge sale">عرض</span>
-                    </div>
-                    <div class="product-body">
-                        <div class="product-cat">Xbox</div>
-                        <div class="product-name">Xbox Series S 512GB</div>
-                        <div class="product-desc">اقتصادي • ديجيتال</div>
-                        <div class="product-footer">
-                            <div class="price">$299</div>
-                            <span class="buy-btn">شراء</span>
-                        </div>
-                    </div>
-                </a>
-                <a class="product" href="https://www.amazon.com/s?k=Nintendo+Switch+OLED" target="_blank">
-                    <div class="product-img">
-                        <img src="https://images.unsplash.com/photo-1578303516474-4a0b3b5c0c0c?w=400&h=300&fit=crop" alt="Switch OLED" loading="lazy"
-                             onerror="this.src='https://images.unsplash.com/photo-1550745165-9bc0b252726f?w=400&h=300&fit=crop'">
-                    </div>
-                    <div class="product-body">
-                        <div class="product-cat">Nintendo</div>
-                        <div class="product-name">Nintendo Switch OLED</div>
-                        <div class="product-desc">شاشة OLED • محمول</div>
-                        <div class="product-footer">
-                            <div class="price">$349</div>
-                            <span class="buy-btn">شراء</span>
-                        </div>
-                    </div>
-                </a>
-                <a class="product" href="https://www.amazon.com/s?k=DualSense+Controller" target="_blank">
-                    <div class="product-img">
-                        <img src="https://images.unsplash.com/photo-1592840496694-26d035b52b48?w=400&h=300&fit=crop" alt="DualSense" loading="lazy">
-                    </div>
-                    <div class="product-body">
-                        <div class="product-cat">PlayStation</div>
-                        <div class="product-name">DualSense Controller</div>
-                        <div class="product-desc">يد تحكم PS5 أصلية</div>
-                        <div class="product-footer">
-                            <div class="price">$69</div>
-                            <span class="buy-btn">شراء</span>
-                        </div>
-                    </div>
-                </a>
-                <a class="product" href="https://www.amazon.com/s?k=Xbox+Wireless+Controller" target="_blank">
-                    <div class="product-img">
-                        <img src="https://images.unsplash.com/photo-1612287230202-1ff1d85d1bdf?w=400&h=300&fit=crop" alt="Xbox Controller" loading="lazy">
-                    </div>
-                    <div class="product-body">
-                        <div class="product-cat">Xbox</div>
-                        <div class="product-name">Xbox Wireless Controller</div>
-                        <div class="product-desc">يد تحكم Series X/S</div>
-                        <div class="product-footer">
-                            <div class="price">$54</div>
-                            <span class="buy-btn">شراء</span>
-                        </div>
-                    </div>
-                </a>
-            </div>
-        </div>
-
-        <!-- PERIPHERALS -->
-        <div class="cat-section active" data-cat="peripherals all">
-            <div class="section-head"><h3>الملحقات Peripherals</h3><div class="line"></div></div>
-            <div class="products">
-                <a class="product" href="https://www.amazon.com/s?k=Razer+BlackWidow+V4" target="_blank">
-                    <div class="product-img">
-                        <img src="https://images.unsplash.com/photo-1541140532154-b024d705b90a?w=400&h=300&fit=crop" alt="Razer Keyboard" loading="lazy">
-                    </div>
-                    <div class="product-body">
-                        <div class="product-cat">Keyboard</div>
-                        <div class="product-name">Razer BlackWidow V4</div>
-                        <div class="product-desc">ميكانيكي • RGB</div>
-                        <div class="product-footer">
-                            <div class="price">$149</div>
-                            <span class="buy-btn">شراء</span>
-                        </div>
-                    </div>
-                </a>
-                <a class="product" href="https://www.amazon.com/s?k=G+Pro+X+Superlight+2" target="_blank">
-                    <div class="product-img">
-                        <img src="https://images.unsplash.com/photo-1527864550417-7fd91fc51a46?w=400&h=300&fit=crop" alt="Logitech Mouse" loading="lazy">
-                        <span class="product-badge">جديد</span>
-                    </div>
-                    <div class="product-body">
-                        <div class="product-cat">Mouse</div>
-                        <div class="product-name">Logitech G Pro X Superlight 2</div>
-                        <div class="product-desc">خفيف • لاسلكي</div>
-                        <div class="product-footer">
-                            <div class="price">$159</div>
-                            <span class="buy-btn">شراء</span>
-                        </div>
-                    </div>
-                </a>
-                <a class="product" href="https://www.amazon.com/s?k=HyperX+Cloud+III" target="_blank">
-                    <div class="product-img">
-                        <img src="https://images.unsplash.com/photo-1546435770-a3e426bf472b?w=400&h=300&fit=crop" alt="HyperX Headset" loading="lazy">
-                    </div>
-                    <div class="product-body">
-                        <div class="product-cat">Headset</div>
-                        <div class="product-name">HyperX Cloud III</div>
-                        <div class="product-desc">صوت ممتاز • راحة طويلة</div>
-                        <div class="product-footer">
-                            <div class="price">$99</div>
-                            <span class="buy-btn">شراء</span>
-                        </div>
-                    </div>
-                </a>
-                <a class="product" href="https://www.amazon.com/s?k=Samsung+Odyssey+G5+27" target="_blank">
-                    <div class="product-img">
-                        <img src="https://images.unsplash.com/photo-1527443224154-c4a3942d3acf?w=400&h=300&fit=crop" alt="Monitor" loading="lazy">
-                    </div>
-                    <div class="product-body">
-                        <div class="product-cat">Monitor</div>
-                        <div class="product-name">Samsung Odyssey G5 27"</div>
-                        <div class="product-desc">1440p • 165Hz • منحني</div>
-                        <div class="product-footer">
-                            <div class="price">$229</div>
-                            <span class="buy-btn">شراء</span>
-                        </div>
-                    </div>
-                </a>
-                <a class="product" href="https://www.amazon.com/s?k=Secretlab+Titan+Evo" target="_blank">
-                    <div class="product-img">
-                        <img src="https://images.unsplash.com/photo-1592078615290-033ee584e267?w=400&h=300&fit=crop" alt="Gaming Chair" loading="lazy">
-                    </div>
-                    <div class="product-body">
-                        <div class="product-cat">Chair</div>
-                        <div class="product-name">Secretlab Titan Evo</div>
-                        <div class="product-desc">كرسي جيمنج فاخر</div>
-                        <div class="product-footer">
-                            <div class="price">$519</div>
-                            <span class="buy-btn">شراء</span>
-                        </div>
-                    </div>
-                </a>
-                <a class="product" href="https://www.amazon.com/s?k=HyperX+QuadCast+S" target="_blank">
-                    <div class="product-img">
-                        <img src="https://images.unsplash.com/photo-1590602847861-f357a9332bbc?w=400&h=300&fit=crop" alt="Microphone" loading="lazy">
-                    </div>
-                    <div class="product-body">
-                        <div class="product-cat">Microphone</div>
-                        <div class="product-name">HyperX QuadCast S</div>
-                        <div class="product-desc">مايك RGB للبث</div>
-                        <div class="product-footer">
-                            <div class="price">$139</div>
-                            <span class="buy-btn">شراء</span>
-                        </div>
-                    </div>
-                </a>
-            </div>
-        </div>
-
+        <button class="icon-btn" id="themeToggle" title="الوضع الليلي/النهاري">
+          <i class="fas fa-sun"></i>
+        </button>
+        <button class="icon-btn" id="favBtn" title="المفضلة">
+          <i class="fas fa-heart"></i>
+          <span class="badge-count" id="favCount" style="display:none">0</span>
+        </button>
+        <button class="icon-btn" id="cartBtn" title="السلة">
+          <i class="fas fa-shopping-cart"></i>
+          <span class="badge-count" id="cartCount" style="display:none">0</span>
+        </button>
+      </div>
     </div>
+  </header>
 
-    <footer>
-        <div class="footer-inner">
-            <div class="footer-col">
-                <h4>THE KINGDOM</h4>
-                <p>مملكة الجيمنج — تجميعات جاهزة وقطع أصلية من أقوى المتاجر العالمية.</p>
-            </div>
-            <div class="footer-col">
-                <h4>الأقسام</h4>
-                <a href="#" onclick="showCat('builds', this); return false;">تجميعات جاهزة</a>
-                <a href="#" onclick="showCat('cpu', this); return false;">المعالجات</a>
-                <a href="#" onclick="showCat('gpu', this); return false;">كروت الشاشة</a>
-                <a href="#" onclick="showCat('console', this); return false;">الكونسول</a>
-            </div>
-            <div class="footer-col">
-                <h4>المتاجر</h4>
-                <a href="https://www.amazon.com" target="_blank">Amazon</a>
-                <a href="https://www.newegg.com" target="_blank">Newegg</a>
-                <a href="https://www.alibaba.com" target="_blank">Alibaba</a>
-                <a href="https://www.aliexpress.com" target="_blank">AliExpress</a>
-            </div>
-            <div class="footer-col">
-                <h4>إنستغرام</h4>
-                <a href="https://www.instagram.com/nvidia/" target="_blank">NVIDIA</a>
-                <a href="https://www.instagram.com/amd/" target="_blank">AMD</a>
-                <a href="https://www.instagram.com/razer/" target="_blank">Razer</a>
-                <a href="https://www.instagram.com/playstation/" target="_blank">PlayStation</a>
-            </div>
+  <nav class="cat-nav" id="catNav"></nav>
+
+  <section class="hero">
+    <h2>THE KINGDOM</h2>
+    <p>مملكة الجيمنج — تجميعات جاهزة، قطع أصلية، كونسولات ومعدات من أقوى المتاجر العالمية</p>
+  </section>
+
+  <div class="filters-bar">
+    <div class="filter-group">
+      <label>الشركة</label>
+      <select id="brandFilter"></select>
+    </div>
+    <div class="filter-group">
+      <label>من</label>
+      <input type="number" id="minPrice" placeholder="0" min="0" style="width:80px">
+      <label>إلى</label>
+      <input type="number" id="maxPrice" placeholder="9999" min="0" style="width:80px">
+      <label>$</label>
+    </div>
+    <div class="filter-group">
+      <label>ترتيب</label>
+      <select id="sortBy">
+        <option value="default">الافتراضي</option>
+        <option value="price-asc">السعر: الأقل</option>
+        <option value="price-desc">السعر: الأعلى</option>
+        <option value="name">الاسم</option>
+      </select>
+    </div>
+    <span class="results-count" id="resultsCount">0 منتج</span>
+  </div>
+
+  <div class="container">
+    <div class="products-grid" id="productsGrid"></div>
+  </div>
+
+  <!-- Product Modal -->
+  <div class="modal-overlay" id="modalOverlay">
+    <div class="modal">
+      <button class="modal-close" id="modalClose"><i class="fas fa-times"></i></button>
+      <div class="modal-body">
+        <div class="modal-img">
+          <img id="modalImg" src="" alt="">
         </div>
-        <div class="footer-bottom">
-            <span>⚔</span> © 2026 THE KINGDOM — All Rights Reserved <span>⚔</span>
+        <div class="modal-info">
+          <div class="product-brand" id="modalBrand"></div>
+          <h3 id="modalName"></h3>
+          <p class="desc" id="modalDesc"></p>
+          <ul class="specs" id="modalSpecs"></ul>
+          <div class="modal-price" id="modalPrice"></div>
+          <div class="modal-actions">
+            <button class="btn-primary" id="modalAddCart">
+              <i class="fas fa-cart-plus"></i> أضف للسلة
+            </button>
+            <a class="btn-secondary" id="modalBuy" href="#" target="_blank">
+              <i class="fas fa-external-link-alt"></i> شراء من المتجر
+            </a>
+            <button class="btn-secondary" id="modalFav">
+              <i class="far fa-heart"></i> مفضلة
+            </button>
+          </div>
         </div>
-    </footer>
+      </div>
+    </div>
+  </div>
 
-    <script>
-        function showCat(cat, el) {
-            document.querySelectorAll('nav a').forEach(a => a.classList.remove('active'));
-            if (el) el.classList.add('active');
-            document.querySelectorAll('.cat-section').forEach(sec => {
-                const cats = sec.dataset.cat.split(' ');
-                if (cat === 'all' || cats.includes(cat)) {
-                    sec.style.display = 'block';
-                    sec.classList.add('active');
-                } else {
-                    sec.style.display = 'none';
-                    sec.classList.remove('active');
-                }
-            });
-        }
-    </script>
+  <!-- Cart Drawer -->
+  <div class="cart-overlay" id="cartOverlay"></div>
+  <div class="cart-drawer" id="cartDrawer">
+    <div class="cart-header">
+      <h3><i class="fas fa-shopping-cart"></i> سلة المشتريات</h3>
+      <button class="icon-btn" id="cartClose"><i class="fas fa-times"></i></button>
+    </div>
+    <div class="cart-items" id="cartItems"></div>
+    <div class="cart-footer">
+      <div class="cart-total">
+        <span>المجموع</span>
+        <span id="cartTotal">$0</span>
+      </div>
+      <button class="btn-primary" id="checkoutBtn" style="width:100%;justify-content:center">
+        <i class="fab fa-whatsapp"></i> إرسال الطلب عبر واتساب
+      </button>
+    </div>
+  </div>
 
-<!-- Default Statcounter code for THE KINGDOOM
-https://alihaider01098-hub.github.io/the-kingdom-/ -->
-<script type="text/javascript">
-var sc_project=13340650; 
-var sc_invisible=1; 
-var sc_security="b00a7797"; 
-</script>
-<script type="text/javascript"
-src="https://www.statcounter.com/counter/counter.js" async></script>
-<noscript><div class="statcounter"><a title="Web Analytics"
-href="https://statcounter.com/" target="_blank"><img class="statcounter"
-src="https://c.statcounter.com/13340650/0/b00a7797/1/" alt="Web Analytics"
-referrerPolicy="no-referrer-when-downgrade"></a></div></noscript>
-<!-- End of Statcounter Code -->
+  <!-- Toast -->
+  <div class="toast" id="toast"></div>
 
+  <footer>
+    <div class="footer-inner">
+      <div class="footer-col">
+        <h4>THE KINGDOM</h4>
+        <p>مملكة الجيمنج — تجميعات وقطع أصلية من أقوى المتاجر العالمية.</p>
+      </div>
+      <div class="footer-col">
+        <h4>روابط</h4>
+        <a href="https://www.amazon.com" target="_blank">Amazon</a>
+        <a href="https://www.newegg.com" target="_blank">Newegg</a>
+        <a href="https://www.alibaba.com" target="_blank">Alibaba</a>
+      </div>
+      <div class="footer-col">
+        <h4>تواصل</h4>
+        <a href="https://wa.me/9647000000000" target="_blank"><i class="fab fa-whatsapp"></i> واتساب</a>
+        <a href="https://www.instagram.com" target="_blank"><i class="fab fa-instagram"></i> إنستغرام</a>
+      </div>
+    </div>
+    <div class="footer-bottom">
+      <i class="fas fa-crown" style="color:var(--gold-dim)"></i>
+      © 2026 THE KINGDOM — All Rights Reserved
+    </div>
+  </footer>
+
+  <!-- StatCounter (اختياري - ضع كودك هنا) -->
+  <!--
+  <script type="text/javascript">
+  var sc_project=13340650;
+  var sc_invisible=1;
+  var sc_security="b00a7797";
+  </script>
+  <script type="text/javascript" src="https://www.statcounter.com/counter/counter.js" async></script>
+  -->
+
+  <script src="js/data.js"></script>
+  <script src="js/app.js"></script>
 </body>
 </html>
