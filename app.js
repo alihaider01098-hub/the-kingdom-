@@ -1,7 +1,12 @@
 /* ========== THE KINGDOM v2 App ========== */
 let PRODUCTS = [];
-let cart = JSON.parse(localStorage.getItem("tk_cart") || "[]");
-let favorites = JSON.parse(localStorage.getItem("tk_favs") || "[]");
+let cart = [];
+let favorites = [];
+
+// حماية الكود من الانهيار إذا كانت الذاكرة المحلية للمتصفح تالفة
+try { cart = JSON.parse(localStorage.getItem("tk_cart") || "[]"); } catch(e) {}
+try { favorites = JSON.parse(localStorage.getItem("tk_favs") || "[]"); } catch(e) {}
+
 let currentCategory = "all";
 let searchQuery = "";
 let brandFilter = "all";
@@ -11,6 +16,37 @@ let minPrice = 0, maxPrice = 99999;
 let sortBy = "default";
 let currentView = "home";
 let editingId = null;
+
+document.addEventListener("DOMContentLoaded", () => {
+  // 1. تجهيز الواجهة وإخفاء شاشة التحميل فوراً! (لا ننتظر قاعدة البيانات)
+  loadTheme();
+  hideLoader();
+  bindGlobal();
+
+  // 2. تحميل البيانات المحلية أولاً لكي يفتح الموقع بسرعة للعميل
+  loadProducts().then(() => {
+    handleRoute();
+    window.addEventListener("hashchange", handleRoute);
+  });
+
+  // 3. الاتصال بـ Supabase في الخلفية لكي لا يعلق الموقع
+  setTimeout(() => {
+    initSupabase();
+    if (supabaseClient) {
+      seedSupabaseIfEmpty().then(() => {
+        supabaseClient.from("products").select("*").order("id").then(({ data }) => {
+          if (data && data.length) {
+            PRODUCTS = data.map(mapFromDb);
+            localStorage.setItem("tk_products", JSON.stringify(PRODUCTS));
+            if (currentView === "home") renderProducts(); // تحديث المنتجات بصمت في الخلفية
+          }
+        }).catch(e => console.warn("Supabase fetch error", e));
+      });
+    }
+  }, 1000); // نؤخر الاتصال ثانية واحدة لضمان سلاسة فتح الواجهة أولاً
+});
+
+let supabaseClient = null;
 
 document.addEventListener("DOMContentLoaded", async () => {
   // مؤقت أمان لإجبار الموقع على الفتح وإخفاء شاشة التحميل بعد 3 ثوانٍ
